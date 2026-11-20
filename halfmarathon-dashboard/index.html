@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6F1EA">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="古都半馬">
+  <meta name="description" content="2027 臺南古都半馬備戰：本週課表、跑量紀錄與訓練進度。">
+  <title>古都半馬手帳</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F1EA;
+      --card: #FFFCFA;
+      --ink: #2A2623;
+      --muted: #8B837A;
+      --line: #E6DFD4;
+      --rose: #B5645C;
+      --rose-soft: #F3E4E0;
+      --sage: #5F7D66;
+      --sage-soft: #E5EFE7;
+      --gold: #A67B3D;
+      --gold-soft: #F4EBD8;
+      --shadow: 0 8px 24px rgba(42, 38, 35, 0.05);
+      --radius: 20px;
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100dvh;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px calc(48px + var(--safe-bottom)); }
+    header.hero { padding: calc(28px + var(--safe-top)) 0 4px; }
+    .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+    h1 {
+      font-family: "Noto Serif TC", "Songti TC", serif;
+      font-weight: 600;
+      font-size: clamp(28px, 7vw, 40px);
+      letter-spacing: 0.04em;
+      line-height: 1.25;
+      margin: 0 0 8px;
+    }
+    .lede { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+    .goal {
+      background: var(--rose-soft);
+      color: #7A3F3A;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+      margin: 0 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+    .card h2 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+    .countdown {
+      text-align: center;
+      padding: 22px 16px 18px;
+    }
+    .countdown .days {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(56px, 16vw, 80px);
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .countdown .unit { color: var(--muted); font-size: 14px; margin-top: 4px; }
+    .countdown .race { margin: 10px 0 0; font-size: 15px; }
+    .countdown .meta { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+    .countdown a { color: inherit; }
+    .bars { display: flex; flex-direction: column; gap: 14px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+    .bar-label span { color: var(--muted); }
+    .track { height: 8px; background: var(--bg); border-radius: 999px; overflow: hidden; }
+    .fill { height: 100%; background: var(--rose); border-radius: 999px; width: 0; transition: width 0.4s ease; }
+    .fill.sage { background: var(--sage); }
+    .fill.gold { background: var(--gold); }
+    .week { display: flex; flex-direction: column; gap: 8px; }
+    .day {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    .day.today {
+      border-color: var(--ink);
+      background: #F3EDE4;
+      box-shadow: inset 0 0 0 1px var(--ink);
+    }
+    .dow { font-weight: 600; font-size: 13px; }
+    .day .title { font-size: 14px; font-weight: 500; }
+    .day .note { font-size: 12px; color: var(--muted); }
+    .kind {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: var(--idle-bg, #EFEBE6);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .kind.strength { background: var(--rose-soft); color: #7A3F3A; }
+    .kind.run, .kind.choice { background: var(--sage-soft); color: #3F5A46; }
+    .kind.rest { background: #EFEBE6; color: var(--muted); }
+    .today-tag { display: inline-block; margin-left: 4px; font-size: 11px; color: var(--rose); font-weight: 600; }
+    .rule { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+    .log-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .log-cell { text-align: center; }
+    .log-cell label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .log-cell input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 2px;
+      font: inherit;
+      font-size: 15px;
+      text-align: center;
+      background: #fff;
+      color: var(--ink);
+    }
+    .log-cell input:focus { outline: none; border-color: #C9B8A4; }
+    .log-cell.today input { border-color: var(--ink); background: #F3EDE4; }
+    .log-sum {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 14px;
+      gap: 12px;
+    }
+    .log-sum strong { font-family: "Noto Serif TC", serif; font-size: 28px; font-weight: 600; }
+    .goal-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+    .goal-row input {
+      width: 72px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font: inherit;
+      font-size: 14px;
+      background: #fff;
+    }
+    details.workout { margin-top: 10px; }
+    details.workout summary {
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+      list-style: none;
+    }
+    details.workout summary::-webkit-details-marker { display: none; }
+    .ex { font-size: 13px; margin: 8px 0 0; padding: 0; list-style: none; }
+    .ex li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); }
+    .ex span { color: var(--muted); white-space: nowrap; }
+    .hint { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+    footer { margin-top: 8px; color: var(--muted); font-size: 12px; text-align: center; }
+    footer a { color: inherit; }
+    .error { color: var(--rose); }
+    @media (max-width: 400px) {
+      .log-grid { gap: 4px; }
+      .log-cell input { padding: 8px 0; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Training Log</p>
+      <h1>古都半馬手帳</h1>
+      <p class="lede" id="todayLine">載入中…</p>
+      <p class="goal" id="goal" hidden></p>
+    </header>
+    <section class="card countdown" id="countdown" hidden></section>
+    <section class="card" id="progressCard" hidden>
+      <h2>進度</h2>
+      <div class="bars" id="bars"></div>
+    </section>
+    <section class="card" id="weekCard" hidden>
+      <h2>本週課表</h2>
+      <div class="week" id="week"></div>
+      <p class="rule" id="rule"></p>
+      <div id="todayWorkout"></div>
+    </section>
+    <section class="card" id="logCard" hidden>
+      <h2>本週跑量</h2>
+      <div class="log-grid" id="logGrid"></div>
+      <div class="log-sum">
+        <div>本週合計<br><strong id="weekTotal">0</strong> <span style="color:var(--muted)">公里</span></div>
+        <label class="goal-row">目標 <input id="weekGoal" type="number" min="0" step="0.1" inputmode="decimal" placeholder="選填"> 公里</label>
+      </div>
+      <div class="bars" style="margin-top:12px" id="mileBarWrap"></div>
+      <p class="hint" id="longHint"></p>
+    </section>
+    <footer>
+      <p id="disclaimer"></p>
+      <p><a href="../index.html">回到樣品首頁</a></p>
+    </footer>
+  </div>
+  <script>
+    const TZ = "Asia/Taipei";
+    const STORE_KEY = "halfmarathon.mileage.v1";
+    const $ = (id) => document.getElementById(id);
+
+    function taipeiParts(d = new Date()) {
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit", weekday: "short"
+      });
+      const map = {};
+      fmt.formatToParts(d).forEach((p) => { map[p.type] = p.value; });
+      return map;
+    }
+    function ymd(d = new Date()) {
+      const p = taipeiParts(d);
+      return `${p.year}-${p.month}-${p.day}`;
+    }
+    function parseYmd(s) {
+      const [y, m, da] = s.split("-").map(Number);
+      return Date.UTC(y, m - 1, da);
+    }
+    function addDaysYmd(s, n) {
+      const t = parseYmd(s) + n * 86400000;
+      const d = new Date(t);
+      const y = d.getUTCFullYear();
+      const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+      const da = String(d.getUTCDate()).padStart(2, "0");
+      return `${y}-${m}-${da}`;
+    }
+    function dowMon0(s) {
+      // 0=Mon ... 6=Sun, from YYYY-MM-DD interpreted as calendar date
+      return (new Date(parseYmd(s)).getUTCDay() + 6) % 7;
+    }
+    function mondayOf(s) {
+      return addDaysYmd(s, -dowMon0(s));
+    }
+    function daysUntil(from, to) {
+      return Math.round((parseYmd(to) - parseYmd(from)) / 86400000);
+    }
+    function fmtLong(s) {
+      const [y, m, d] = s.split("-");
+      const names = ["日", "一", "二", "三", "四", "五", "六"];
+      const dow = new Date(parseYmd(s)).getUTCDay();
+      return `${Number(y)} 年 ${Number(m)} 月 ${Number(d)} 日（週${names[dow]}）`;
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[c]));
+    }
+    function loadStore() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }
+      catch { return {}; }
+    }
+    function saveStore(obj) {
+      localStorage.setItem(STORE_KEY, JSON.stringify(obj));
+    }
+
+    function setup(data) {
+      const today = ymd();
+      const p = taipeiParts();
+      const weekdays = { Sun: "日", Mon: "一", Tue: "二", Wed: "三", Thu: "四", Fri: "五", Sat: "六" };
+      $("todayLine").textContent = `今天是 ${fmtLong(today)}，台北時間`;
+      $("goal").hidden = false;
+      $("goal").textContent = "目標：" + data.goal;
+      $("disclaimer").textContent = data.disclaimer;
+      $("rule").textContent = data.sameDayRule;
+
+      const raceDate = data.race && data.race.date;
+      const left = raceDate ? daysUntil(today, raceDate) : null;
+      if (raceDate && left != null) {
+        $("countdown").hidden = false;
+        const weeks = Math.max(0, Math.floor(left / 7));
+        const src = data.race.sourceUrl
+          ? `來源：<a href="${escapeHtml(data.race.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(data.race.sourceName)}</a>`
+          : "";
+        $("countdown").innerHTML =
+          `<div class="days">${left < 0 ? 0 : left}</div>
+           <div class="unit">${left < 0 ? "比賽已結束" : "天後就是比賽日"}</div>
+           <p class="race">${escapeHtml(data.race.name)}</p>
+           <p class="meta">${fmtLong(raceDate)}　·　約 ${weeks} 週<br>${src}</p>`;
+      }
+
+      const start = data.planStart;
+      const totalWeeks = data.totalWeeks || 16;
+      const weekIndex = Math.floor(daysUntil(start, today) / 7) + 1;
+      const weekClamped = Math.min(Math.max(weekIndex, 1), totalWeeks);
+      const planPct = Math.min(100, Math.max(0, (weekClamped / totalWeeks) * 100));
+      const phase = (data.phases || []).find((ph) => today >= ph.start && today <= ph.end);
+      const weeksOut = raceDate ? Math.max(0, Math.floor(left / 7)) : null;
+      const longRange = weeksOut != null && data.longRunByWeeksOut
+        ? data.longRunByWeeksOut[String(weeksOut)] || data.longRunByWeeksOut[String(Math.min(16, weeksOut))]
+        : null;
+
+      $("progressCard").hidden = false;
+      const phaseLabel = phase ? `${phase.label}（${phase.weeks}）` : "課表期間外";
+      $("bars").innerHTML = `
+        <div>
+          <div class="bar-label"><b>備戰週期</b><span>第 ${weekClamped} ／ ${totalWeeks} 週 · ${escapeHtml(phaseLabel)}</span></div>
+          <div class="track"><div class="fill" style="width:${planPct}%"></div></div>
+        </div>
+        ${left != null && left >= 0 ? `
+        <div>
+          <div class="bar-label"><b>距離比賽</b><span>已過 ${Math.max(0, 100 - Math.round((left / Math.max(1, daysUntil(start, raceDate))) * 100))}%</span></div>
+          <div class="track"><div class="fill gold" id="raceFill"></div></div>
+        </div>` : ""}
+        <div id="kmBarSlot"></div>`;
+      if (left != null && left >= 0) {
+        const all = Math.max(1, daysUntil(start, raceDate));
+        const done = Math.min(100, Math.max(0, (daysUntil(start, today) / all) * 100));
+        document.getElementById("raceFill").style.width = done + "%";
+      }
+
+      const mon = mondayOf(today);
+      const planByDow = {};
+      data.weekPlan.forEach((d) => { planByDow[d.dow] = d; });
+      $("weekCard").hidden = false;
+      const kindLabel = { strength: "重訓", run: "跑步", choice: "跑步／休息", rest: "休息" };
+      let todayType = null;
+      $("week").innerHTML = [1, 2, 3, 4, 5, 6, 0].map((dow, i) => {
+        const date = addDaysYmd(mon, i);
+        const item = planByDow[dow];
+        const isToday = date === today;
+        if (isToday) todayType = item;
+        const kind = (data.types[item.type] || {}).kind || "";
+        return `<div class="day${isToday ? " today" : ""}">
+          <div class="dow">${item.label}${isToday ? '<span class="today-tag">今天</span>' : ""}</div>
+          <div><div class="title">${escapeHtml(item.title)}</div>${item.note ? `<div class="note">${escapeHtml(item.note)}</div>` : ""}</div>
+          <span class="kind ${kind}">${kindLabel[kind] || ""}</span>
+        </div>`;
+      }).join("");
+
+      if (todayType && data.workouts[todayType.type]) {
+        const w = data.workouts[todayType.type];
+        $("todayWorkout").innerHTML = `<details class="workout" open>
+          <summary>今天的動作 · ${escapeHtml(w.focus)}</summary>
+          <ul class="ex">${w.exercises.map((e) =>
+            `<li>${escapeHtml(e.name)}<span>${escapeHtml(e.sets)} · ${escapeHtml(e.reps)}</span></li>`
+          ).join("")}</ul>
+        </details>`;
+      }
+
+      $("logCard").hidden = false;
+      const store = loadStore();
+      if (!store.weeks) store.weeks = {};
+      if (!store.weeks[mon]) store.weeks[mon] = { km: [0, 0, 0, 0, 0, 0, 0], goal: "" };
+      const week = store.weeks[mon];
+      const short = ["一", "二", "三", "四", "五", "六", "日"];
+      $("logGrid").innerHTML = short.map((lab, i) => {
+        const date = addDaysYmd(mon, i);
+        const isToday = date === today;
+        const val = week.km[i] ? String(week.km[i]) : "";
+        return `<div class="log-cell${isToday ? " today" : ""}">
+          <label for="km${i}">${lab}</label>
+          <input id="km${i}" type="number" min="0" step="0.1" inputmode="decimal" value="${escapeHtml(val)}" aria-label="週${lab}跑量公里">
+        </div>`;
+      }).join("");
+      $("weekGoal").value = week.goal || "";
+      if (longRange) {
+        $("longHint").textContent = `依目前距離比賽的週數，本週日長跑建議約 ${longRange[0]}–${longRange[1]} 公里（一般備戰節奏，不是處方）。`;
+      }
+
+      function paintKm() {
+        const total = week.km.reduce((a, b) => a + (Number(b) || 0), 0);
+        $("weekTotal").textContent = (Math.round(total * 10) / 10).toString();
+        const goal = Number(week.goal);
+        const slot = document.getElementById("kmBarSlot");
+        const wrap = $("mileBarWrap");
+        if (goal > 0) {
+          const pct = Math.min(100, (total / goal) * 100);
+          const html = `<div>
+            <div class="bar-label"><b>本週跑量</b><span>${Math.round(total * 10) / 10} ／ ${goal} 公里</span></div>
+            <div class="track"><div class="fill sage" style="width:${pct}%"></div></div>
+          </div>`;
+          wrap.innerHTML = html;
+          slot.innerHTML = html;
+        } else {
+          wrap.innerHTML = "";
+          slot.innerHTML = `<div>
+            <div class="bar-label"><b>本週跑量</b><span>${Math.round(total * 10) / 10} 公里（可在下方設定目標）</span></div>
+            <div class="track"><div class="fill sage" style="width:0"></div></div>
+          </div>`;
+        }
+      }
+      function persist() {
+        store.weeks[mon] = week;
+        saveStore(store);
+        paintKm();
+      }
+      for (let i = 0; i < 7; i++) {
+        $("km" + i).addEventListener("change", (e) => {
+          const n = Number(e.target.value);
+          week.km[i] = Number.isFinite(n) && n > 0 ? n : 0;
+          persist();
+        });
+        $("km" + i).addEventListener("input", (e) => {
+          const n = Number(e.target.value);
+          week.km[i] = Number.isFinite(n) && n > 0 ? n : 0;
+          paintKm();
+        });
+      }
+      $("weekGoal").addEventListener("change", (e) => {
+        week.goal = e.target.value;
+        persist();
+      });
+      $("weekGoal").addEventListener("input", (e) => {
+        week.goal = e.target.value;
+        paintKm();
+      });
+      paintKm();
+    }
+
+    fetch("data.json")
+      .then((r) => { if (!r.ok) throw new Error("load"); return r.json(); })
+      .then(setup)
+      .catch(() => { $("todayLine").innerHTML = '<span class="error">資料載入失敗，請用本機或網站伺服器開啟這一頁。</span>'; });
+  </script>
+</body>
+</html>

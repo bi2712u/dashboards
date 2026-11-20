@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6F1EA">
+  <meta name="description" content="兩個靜態樣品：Bot 任務總表，以及 2027 臺南古都半馬備戰手帳。">
+  <title>樣品小站</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F1EA;
+      --card: #FFFCFA;
+      --ink: #2A2623;
+      --muted: #8B837A;
+      --line: #E6DFD4;
+      --rose: #B5645C;
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      line-height: 1.65;
+    }
+    .wrap { max-width: 640px; margin: 0 auto; padding: calc(40px + var(--safe-top)) 22px calc(48px + var(--safe-bottom)); }
+    .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+    h1 {
+      font-family: "Noto Serif TC", "Songti TC", serif;
+      font-weight: 600;
+      font-size: clamp(32px, 8vw, 46px);
+      letter-spacing: 0.06em;
+      margin: 0 0 10px;
+    }
+    .lede { color: var(--muted); margin: 0 0 28px; font-size: 15px; }
+    .grid { display: flex; flex-direction: column; gap: 14px; }
+    a.tile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 8px 24px rgba(42, 38, 35, 0.05);
+    }
+    a.tile:active { transform: scale(0.99); }
+    .num { font-size: 12px; letter-spacing: 0.16em; color: var(--rose); margin: 0 0 8px; }
+    a.tile h2 {
+      font-family: "Noto Serif TC", serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+    a.tile p { margin: 0; color: var(--muted); font-size: 14px; }
+    .go { display: inline-block; margin-top: 14px; font-size: 13px; letter-spacing: 0.08em; color: var(--ink); }
+    footer { margin-top: 32px; font-size: 12px; color: var(--muted); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Samples</p>
+    <h1>樣品小站</h1>
+    <p class="lede">兩個可直接開啟的靜態頁，之後可放到 GitHub Pages。這是先看方向的樣品，還沒部署。</p>
+    <div class="grid">
+      <a class="tile" href="bot-task-board/">
+        <p class="num">01</p>
+        <h2>Bot 任務總表</h2>
+        <p>把各位 bot 進行中、待決定和待辦的事放在同一張表，可篩選、可搜尋。</p>
+        <span class="go">打開 →</span>
+      </a>
+      <a class="tile" href="halfmarathon-dashboard/">
+        <p class="num">02</p>
+        <h2>古都半馬手帳</h2>
+        <p>2027 臺南古都半馬備戰：比賽倒數、本週課表、可編輯的跑量，以及簡單進度條。</p>
+        <span class="go">打開 →</span>
+      </a>
+    </div>
+    <footer>介面為繁體中文，時間以台北時間為準。跑量只存在你的瀏覽器裡。</footer>
+  </div>
+</body>
+</html>
