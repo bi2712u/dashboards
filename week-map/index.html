@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>每週時間地圖</title>
+<style>
+body{font-family:"Noto Sans TC",system-ui,sans-serif;background:#faf7f2;color:#333;margin:0;padding:20px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#888;font-size:13px;margin-bottom:16px}
+#now{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 2px 8px #0001;margin-bottom:16px;font-size:15px}
+#now b{color:#c0694e}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.day{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px #0001}.dn{font-weight:700;margin-bottom:8px}.tag{border-radius:8px;padding:5px 8px;margin:4px 0;font-size:13px}.x{display:grid;grid-template-columns:48px repeat(7,1fr);gap:2px;background:#fff;border-radius:14px;padding:10px;box-shadow:0 2px 8px #0001;font-size:11px}
+.h{text-align:center;font-weight:600;padding:4px 0}.t{color:#999;text-align:right;padding-right:4px}
+.c{height:16px;border-radius:3px;background:#f1eee8}
+.class{background:#b9a2d8}.contact{background:#a8d5ba}.run{background:#f2b880}.day.today{outline:2px solid #c0694e}
+.legend{display:flex;gap:14px;margin:12px 0;font-size:13px}.legend span:before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+a{color:#c0694e}
+</style></head><body>
+<h1>每週時間地圖</h1><div class="sub">台北時間・上課、可聯絡時段、訓練一眼看完　<a href="../">回首頁</a></div>
+<div id="now"></div>
+<div class="days" id="g"></div>
+<script>
+const days=["週一","週二","週三","週四","週五","週六","週日"];
+const plan={0:"重訓 A（下半身＋核心）",1:"輕鬆跑或休息",2:"重訓 B（上半身）",3:"輕鬆跑或休息",4:"休息",5:"重訓 C（全身＋腹肌）",6:"長距離慢跑"};
+const info=d=>({contact:d<5?["09:00–12:00","13:30–17:30"]:[],cls:(d>=1&&d<=4)?"晚上上課":(d==5?"週六上課":""),run:plan[d]});
+const now=new Date();const td=(now.getDay()+6)%7;
+document.getElementById("g").innerHTML=days.map((n,d)=>{const i=info(d);return `<div class="day${d==td?' today':''}"><div class="dn">${n}${d==td?'・今天':''}</div>
+${i.contact.map(c=>`<div class="tag contact">可聯絡 ${c}</div>`).join("")}
+${i.cls?`<div class="tag class">${i.cls}</div>`:''}<div class="tag run">${i.run}</div></div>`}).join("");
+const hr=now.getHours()+now.getMinutes()/60;const ok=td<5&&((hr>=9&&hr<12)||(hr>=13.5&&hr<17.5));
+const i=info(td);
+document.getElementById("now").innerHTML=`今天${days[td]}，現在 ${now.toTimeString().slice(0,5)}：${ok?'<b>是可聯絡時段</b>':'不在可聯絡時段'}。今天的訓練：<b>${i.run}</b>${i.cls?`；記得 <b>${i.cls}</b>`:''}。`;
+</script></body></html>
