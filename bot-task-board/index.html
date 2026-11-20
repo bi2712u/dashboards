@@ -85,7 +85,7 @@
     }
     .count span { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
     .count[data-status="進行中"] b { color: var(--doing); }
-    .count[data-status="等昕園決定"] b { color: var(--wait); }
+    .count[data-status="等主人決定"] b { color: var(--wait); }
     .count[data-status="待辦"] b { color: var(--todo); }
     .count[data-status="閒置"] b { color: var(--idle); }
     .toolbar {
@@ -161,7 +161,7 @@
       white-space: nowrap;
     }
     .badge.進行中 { background: var(--doing-bg); color: var(--doing); }
-    .badge.等昕園決定 { background: var(--wait-bg); color: var(--wait); }
+    .badge.等主人決定 { background: var(--wait-bg); color: var(--wait); }
     .badge.待辦 { background: var(--todo-bg); color: var(--todo); }
     .badge.閒置 { background: var(--idle-bg); color: var(--idle); }
     .section { margin-top: 14px; }
@@ -217,7 +217,7 @@
     </footer>
   </div>
   <script>
-    const STATUS = ["進行中", "等昕園決定", "待辦", "閒置"];
+    const STATUS = ["進行中", "等主人決定", "待辦", "閒置"];
     const state = { filter: "全部", q: "", data: null };
 
     const $ = (id) => document.getElementById(id);
@@ -242,7 +242,7 @@
         if (q && !haystack(b).includes(q)) return false;
         return true;
       });
-      const order = { "進行中": 0, "等昕園決定": 1, "待辦": 2, "閒置": 3 };
+      const order = { "進行中": 0, "等主人決定": 1, "待辦": 2, "閒置": 3 };
       bots.sort((a, b) => (order[a.status] - order[b.status]) || a.name.localeCompare(b.name, "zh-Hant"));
 
       $("list").innerHTML = bots.map((b) => {
