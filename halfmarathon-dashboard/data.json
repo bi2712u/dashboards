@@ -1,0 +1,309 @@
+{
+  "appName": "古都半馬手帳",
+  "goal": "練出看得見的肩膀與手臂線條，還有看得見的腹肌。",
+  "sameDayRule": "同一天又練又跑時，先做重訓再跑步。",
+  "timezone": "Asia/Taipei",
+  "race": {
+    "name": "2027 臺南古都國際半程馬拉松",
+    "shortName": "臺南古都半馬",
+    "date": "2027-03-07",
+    "sourceName": "臺南市政府體育局",
+    "sourceUrl": "https://www.tainan.gov.tw/News_Content.aspx?n=13371&s=8835347"
+  },
+  "planStart": "2026-11-16",
+  "totalWeeks": 16,
+  "phases": [
+    {
+      "id": "base",
+      "label": "基礎期",
+      "start": "2026-11-16",
+      "end": "2026-12-27",
+      "weeks": "W1–W6"
+    },
+    {
+      "id": "build",
+      "label": "強化期",
+      "start": "2026-12-28",
+      "end": "2027-01-31",
+      "weeks": "W7–W11"
+    },
+    {
+      "id": "peak",
+      "label": "巔峰期",
+      "start": "2027-02-01",
+      "end": "2027-02-21",
+      "weeks": "W12–W14"
+    },
+    {
+      "id": "taper",
+      "label": "減量期",
+      "start": "2027-02-22",
+      "end": "2027-03-07",
+      "weeks": "W15–W16"
+    }
+  ],
+  "weekPlan": [
+    {
+      "dow": 1,
+      "label": "週一",
+      "type": "strengthA",
+      "title": "重訓 A",
+      "note": "下半身＋核心"
+    },
+    {
+      "dow": 2,
+      "label": "週二",
+      "type": "easyOrRest",
+      "title": "輕鬆跑或休息",
+      "note": ""
+    },
+    {
+      "dow": 3,
+      "label": "週三",
+      "type": "strengthB",
+      "title": "重訓 B",
+      "note": "上半身，可改到中午或早上"
+    },
+    {
+      "dow": 4,
+      "label": "週四",
+      "type": "easyOrRest",
+      "title": "輕鬆跑或休息",
+      "note": ""
+    },
+    {
+      "dow": 5,
+      "label": "週五",
+      "type": "rest",
+      "title": "休息",
+      "note": ""
+    },
+    {
+      "dow": 6,
+      "label": "週六",
+      "type": "strengthC",
+      "title": "重訓 C",
+      "note": "全身＋腹肌"
+    },
+    {
+      "dow": 0,
+      "label": "週日",
+      "type": "longRun",
+      "title": "長距離慢跑",
+      "note": ""
+    }
+  ],
+  "types": {
+    "strengthA": {
+      "kind": "strength",
+      "short": "A"
+    },
+    "strengthB": {
+      "kind": "strength",
+      "short": "B"
+    },
+    "strengthC": {
+      "kind": "strength",
+      "short": "C"
+    },
+    "easyOrRest": {
+      "kind": "choice",
+      "short": "輕／休"
+    },
+    "longRun": {
+      "kind": "run",
+      "short": "長跑"
+    },
+    "rest": {
+      "kind": "rest",
+      "short": "休息"
+    },
+    "easyRun": {
+      "kind": "run",
+      "short": "輕跑"
+    }
+  },
+  "workouts": {
+    "strengthA": {
+      "focus": "下半身＋核心",
+      "exercises": [
+        {
+          "name": "深蹲（高腳杯或徒手）",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "羅馬尼亞硬舉",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "分腿蹲",
+          "sets": "3 組",
+          "reps": "每邊 8–10 下"
+        },
+        {
+          "name": "臀推",
+          "sets": "3 組",
+          "reps": "10–12 下"
+        },
+        {
+          "name": "棒式",
+          "sets": "3 組",
+          "reps": "30–45 秒"
+        },
+        {
+          "name": "死蟲",
+          "sets": "3 組",
+          "reps": "每邊 8–10 下"
+        }
+      ]
+    },
+    "strengthB": {
+      "focus": "上半身（肩、背、手臂）",
+      "exercises": [
+        {
+          "name": "肩推",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "划船（啞鈴或器械）",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "側平舉",
+          "sets": "3 組",
+          "reps": "10–15 下"
+        },
+        {
+          "name": "伏地挺身或臥推",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "二頭彎舉",
+          "sets": "3 組",
+          "reps": "10–12 下"
+        },
+        {
+          "name": "三頭下壓或臂屈伸",
+          "sets": "3 組",
+          "reps": "10–12 下"
+        }
+      ]
+    },
+    "strengthC": {
+      "focus": "全身＋腹肌",
+      "exercises": [
+        {
+          "name": "深蹲",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "肩推",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "划船",
+          "sets": "3 組",
+          "reps": "8–12 下"
+        },
+        {
+          "name": "弓步",
+          "sets": "3 組",
+          "reps": "每邊 8–10 下"
+        },
+        {
+          "name": "捲腹或死蟲",
+          "sets": "3 組",
+          "reps": "10–15 下"
+        },
+        {
+          "name": "側棒式",
+          "sets": "3 組",
+          "reps": "每邊 20–30 秒"
+        },
+        {
+          "name": "抬腿",
+          "sets": "3 組",
+          "reps": "10–12 下"
+        }
+      ]
+    }
+  },
+  "longRunByWeeksOut": {
+    "16": [
+      10,
+      12
+    ],
+    "15": [
+      11,
+      13
+    ],
+    "14": [
+      12,
+      14
+    ],
+    "13": [
+      13,
+      15
+    ],
+    "12": [
+      14,
+      16
+    ],
+    "11": [
+      14,
+      16
+    ],
+    "10": [
+      15,
+      17
+    ],
+    "9": [
+      16,
+      18
+    ],
+    "8": [
+      16,
+      18
+    ],
+    "7": [
+      17,
+      19
+    ],
+    "6": [
+      18,
+      20
+    ],
+    "5": [
+      18,
+      20
+    ],
+    "4": [
+      16,
+      18
+    ],
+    "3": [
+      14,
+      16
+    ],
+    "2": [
+      10,
+      13
+    ],
+    "1": [
+      8,
+      10
+    ],
+    "0": [
+      8,
+      10
+    ]
+  },
+  "disclaimer": "本頁是一般健身與跑步訓練參考，不是醫療或個人化運動處方。身體不適時請先休息。跑量只存在這支手機的瀏覽器裡，不會上傳。"
+}
